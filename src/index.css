@@ -1,0 +1,408 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 14% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 14% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 14% 15%;
+
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 14% 15%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 14% 46%;
+
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 211 100% 50%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative px-3 py-2 text-foreground/80 transition-colors after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:text-foreground after:hover:w-full;
+  }
+
+  .nav-link.active {
+    @apply text-foreground after:w-full;
+  }
+
+  .section-container {
+    @apply mx-auto max-w-7xl px-6 py-24 md:px-8 lg:px-12;
+  }
+
+  .section-title {
+    @apply mb-2 text-sm font-semibold uppercase tracking-wider text-primary;
+  }
+
+  .section-heading {
+    @apply mb-12 text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl;
+  }
+
+  .service-card {
+    @apply relative h-[350px] w-full cursor-pointer perspective-1000 transition-all duration-500 hover:scale-105;
+  }
+
+  .service-card-face {
+    @apply absolute inset-0 flex flex-col items-center justify-center rounded-xl border border-border bg-card p-8 shadow-lg backface-hidden transition-all duration-700;
+  }
+
+  .service-card-back {
+    @apply rotate-y-180;
+  }
+
+  .service-card:hover .service-card-front {
+    @apply rotate-y-180;
+  }
+
+  .service-card:hover .service-card-back {
+    @apply rotate-y-0;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  .rotate-y-0 {
+    transform: rotateY(0deg);
+  }
+
+  .job-card {
+    @apply relative overflow-hidden rounded-xl border border-border bg-card p-6 shadow-lg transition-all duration-300 hover:shadow-xl;
+  }
+
+  .glow-effect {
+    @apply focus-within:ring-2 focus-within:ring-offset-1 focus-within:ring-primary;
+  }
+
+  /* Values track animations */
+  .values-track {
+    @apply flex gap-6 relative z-10;
+    width: 200%;
+  }
+
+  .values-track-ltr {
+    animation: scroll-ltr 30s linear infinite;
+  }
+
+  .values-track-rtl {
+    animation: scroll-rtl 30s linear infinite;
+  }
+
+  .value-card {
+    @apply flex-none w-80 transform transition-transform duration-300 hover:scale-105 hover:-translate-y-2;
+    position: relative;
+  }
+
+  .value-card::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 w-4 h-8 bg-primary rounded-t-full transform -translate-x-1/2 translate-y-4;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+
+  /* New animations */
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .cta-button {
+    @apply relative overflow-hidden;
+  }
+
+  .cta-button::after {
+    @apply absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300;
+    content: '';
+  }
+
+  .cta-button:hover::after {
+    @apply w-full;
+  }
+
+  /* Process step animations */
+  .process-step.active {
+    @apply scale-105 transition-all duration-500;
+  }
+  
+  .process-timeline-progress {
+    @apply absolute top-0 left-0 w-full bg-primary transition-all duration-1000 ease-in-out;
+  }
+  
+  /* Ripple animation for process dots */
+  .ripple-effect {
+    @apply after:absolute after:inset-0 after:rounded-full after:bg-primary/30 after:animate-ripple;
+  }
+
+  /* 3D transform utilities */
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .benefit-card {
+    @apply rounded-xl border border-border bg-card p-4 shadow-sm;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .benefit-card:hover {
+    @apply shadow-xl;
+  }
+  
+  /* Benefits track animations */
+  .benefits-track {
+    @apply flex gap-6 relative z-10;
+    width: 200%;
+  }
+
+  .benefits-track-ltr {
+    animation: scroll-ltr 30s linear infinite;
+  }
+
+  .benefits-track-rtl {
+    animation: scroll-rtl 30s linear infinite;
+  }
+  
+  .benefit-card-moving {
+    @apply flex-none w-80 rounded-xl overflow-hidden;
+    position: relative;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .benefit-card-moving:hover {
+    transform: translateZ(30px) rotateY(15deg) translateY(-10px);
+    z-index: 10;
+    @apply shadow-2xl;
+  }
+  
+  .benefit-card-moving:hover > div {
+    transform: scale(1.03);
+    @apply bg-card/100;
+  }
+
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent;
+  }
+
+  /* Team vision animations */
+  .team-vision-card {
+    @apply relative overflow-hidden rounded-xl transition-all duration-500;
+  }
+  
+  .team-vision-card:hover .team-info {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .team-info {
+    @apply absolute inset-0 bg-gradient-to-t from-foreground/90 to-foreground/40 flex flex-col justify-end p-6 opacity-0 translate-y-8 transition-all duration-500;
+  }
+  
+  .info-icon-pulse {
+    animation: info-pulse 1.5s ease-in-out infinite;
+  }
+  
+  .rotating-gradient {
+    background: linear-gradient(45deg, var(--primary), var(--accent), var(--primary));
+    background-size: 200% 200%;
+    animation: gradient-rotate 5s linear infinite;
+  }
+  
+  .perspective-3d {
+    perspective: 1500px;
+  }
+
+  /* Team member animations */
+  .rotating-border {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .rotating-border::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 2px dashed var(--primary-color, rgb(var(--primary)));
+    border-radius: 50%;
+    animation: rotate-border 15s linear infinite;
+    opacity: 0.6;
+  }
+  
+  .team-member {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .team-explorer {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+               opacity 0.3s ease-in-out;
+  }
+  
+  .selected-member {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+               opacity 0.3s ease-in-out;
+    will-change: transform, opacity;
+  }
+  
+  .selected-member.scale-100 {
+    animation: card-appear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  @keyframes card-appear {
+    0% {
+      transform: translateY(30px) scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes rotate-border {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@keyframes scroll-ltr {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-rtl {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes info-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--primary), 0.7);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(var(--primary), 0);
+    transform: scale(1.1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--primary), 0);
+    transform: scale(1);
+  }
+}
+
+@keyframes gradient-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
